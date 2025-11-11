@@ -1,4 +1,8 @@
-package parcelrouter;
+
+
+package parceldeliveryproject.ds;
+
+import parceldeliveryproject.model.Parcel;
 
 public class Sorter {
     public static void bubbleSortName(Parcel[] parcels) {
