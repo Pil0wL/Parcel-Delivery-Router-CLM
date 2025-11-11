@@ -1,4 +1,7 @@
-package parcelrouter;
+
+
+package parceldeliveryproject.ds;
+import parceldeliveryproject.model.Parcel;
 
 public class Queue {
     Parcel[] data;
