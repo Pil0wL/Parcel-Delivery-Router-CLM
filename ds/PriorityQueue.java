@@ -1,4 +1,5 @@
-package parcelrouter;
+package parceldeliveryproject.ds;
+import parceldeliveryproject.model.Parcel;
 
 public class PriorityQueue {
     Parcel[] heap;
