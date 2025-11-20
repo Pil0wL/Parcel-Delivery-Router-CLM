@@ -19,7 +19,7 @@ public class PriorityQueue {
         int i = size;
         size++;
         
-        while (i > 0 && !heap[parent(i)].fragperi && heap[i].fragperi) {
+        while (i > 0 && !heap[parent(i)].Fragile && heap[i].Fragile) {
             Parcel temp = heap[i];
             heap[i] = heap[parent(i)];
             heap[parent(i)] = temp;
@@ -44,9 +44,9 @@ public class PriorityQueue {
         int right = 2 * i + 2;
         int highest = i;
         
-        if (left < size && heap[left].fragperi && !heap[highest].fragperi)
+        if (left < size && heap[left].Fragile && !heap[highest].Fragile)
             highest = left;
-        if (right < size && heap[right].fragperi && !heap[highest].fragperi)
+        if (right < size && heap[right].Fragile && !heap[highest].Fragile)
             highest = right;
         
         if (highest != i) {
