@@ -16,9 +16,9 @@ public class ParcelDeliveryRouterApp {
         Queue pickupQueue = null;
         PriorityQueue priorityQueue = null;
         
-        int choice;
+        boolean running = true;
         
-        do {
+        while (running) {
             System.out.println("\n ===== PARCEL DELIVERY ROUTER MENU ======");
                 System.out.println("[1] Enter Parcels");
                 System.out.println("[2] Display All Parcels");
@@ -31,7 +31,7 @@ public class ParcelDeliveryRouterApp {
                 System.out.println("[9] Deliver From Priority Queue");
                 System.out.println("[10] Exit");
                 System.out.print("Enter Your Choice: ");
-            choice = console.nextInt();
+            int choice = console.nextInt();
             console.nextLine();
             
             switch(choice) {
@@ -43,20 +43,20 @@ public class ParcelDeliveryRouterApp {
                     
                     for (int i = 0; i < num; i++) {
                         System.out.println("\nEnter Details For Parcel " + (i + 1) + ":");
-                            System.out.print("Name: ");
-                            String name = console.nextLine();
-            
-                            System.out.print("ZIP Code: ");
-                            int zip = console.nextInt();
-            
-                            System.out.print("Weight (kg): ");
-                            double weight = console.nextDouble();
-            
-                            System.out.print("Is it Fragile/Perishable? (True/False): ");
-                            boolean fragperi = console.nextBoolean();
-            
-                            console.nextLine();
-                            parcels[i] = new Parcel(name, zip, weight, fragperi);
+                        System.out.print("Name: ");
+                        String name = console.nextLine();
+        
+                        System.out.print("ZIP Code: ");
+                        int zip = console.nextInt();
+        
+                        System.out.print("Weight (kg): ");
+                        double weight = console.nextDouble();
+        
+                        System.out.print("Is it Fragile/Perishable? (True/False): ");
+                        boolean fragperi = console.nextBoolean();
+        
+                        console.nextLine();
+                        parcels[i] = new Parcel(name, zip, weight, fragperi);
                     }
                     System.out.println("Parcels Successfully Recorded");
                     break;
@@ -142,12 +142,13 @@ public class ParcelDeliveryRouterApp {
                     
                 case 10:
                     System.out.println("Exiting Program...");
-                    break;
+                    running = false;
                     
+                    break;
                 default:
                     System.out.println("Invalid Choice, Please Choose A Number On The Menu");
             }
-        } while (choice != 10);
+        }
         
         console.close();
     }

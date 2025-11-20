@@ -15,7 +15,7 @@ public class Parcel {
     public boolean InTransit = false;
     
     public Parcel(String Name, int ZIP, double Weight, boolean Fragile) {
-        ID = Long.toString(System.nanoTime());;
+        ID = Long.toString(System.nanoTime());
         this.Name = Name;
         this.ZIP = ZIP;
         this.Weight = Weight;
