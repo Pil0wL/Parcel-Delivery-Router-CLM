@@ -3,6 +3,8 @@
 
 package parceldeliveryproject.model;
 
+import parceldeliveryproject.ds.DoubleyLinkedList;
+
 
 
 
@@ -12,6 +14,8 @@ public class Parcel {
     public final int ZIP;
     public final double Weight; // in kilograms
     public final boolean Fragile;
+    
+    public DoubleyLinkedList.Node AssociatedNode = null; // think of this as its target house
     public boolean InTransit = false;
     
     public Parcel(String Name, int ZIP, double Weight, boolean Fragile) {

@@ -3,12 +3,13 @@
 package parceldeliveryproject.app;
 
 import parceldeliveryproject.ds.*;
-import parceldeliveryproject.model.Parcel;
+import parceldeliveryproject.model.*;
 import parceldeliveryproject.util.UI.*;
 import parceldeliveryproject.util.Platform;
 import java.util.Scanner;
 
 public class ParcelDeliveryRouterApp {
+
     public static void main(String[] args) {
         
         Scanner console = new Scanner(System.in);
@@ -18,6 +19,13 @@ public class ParcelDeliveryRouterApp {
         Scope.parcels = new Parcel[5];
         Scope.pickupQueue = new Queue(5);
         Scope.console = console;
+        Scope.RouteDLL = new DoubleyLinkedList();
+        Scope.Truck = new VEHICP();
+
+        Scope.RouteDLL._load(Scope);
+        Scope.RealisticRoute._load(Scope);
+        Scope.Truck._load(Scope); // needs to be after the routedll
+        
 
         UIBase[] interfaceArray = new UIBase[] {
             new UIParcel(Scope),
@@ -69,6 +77,8 @@ public class ParcelDeliveryRouterApp {
 
                 continue;
             }
+
+            // to display the other menus
 
             for (int i = 0; i < interfaceArray.length; i++) {
                 UIBase indexedInterface = interfaceArray[i];
