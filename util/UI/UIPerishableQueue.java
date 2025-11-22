@@ -1,6 +1,6 @@
 
 package parceldeliveryproject.util.UI;
-import parceldeliveryproject.util.Platform;
+import parceldeliveryproject.util.*;
 import parceldeliveryproject.model.Parcel;
 import parceldeliveryproject.ds.*;
 
@@ -13,7 +13,7 @@ public class UIPerishableQueue extends UIBase {
         menuTitle = "Perishable Queue Menu";
         displayChoices = new String[] {
             "Create a new Priority Queue from the current parcel roster",
-            "Deliver From Priority Queue"
+            "Enqueue for transport From Priority Queue"
         };
     }
     
@@ -48,6 +48,11 @@ public class UIPerishableQueue extends UIBase {
                     break;
                 }
 
+                if (delivered.InTransit) {
+                    System.out.println("This package has already been readied for delivery; Refresh the current priority queue");
+                    break;
+                }
+
                 int foundpos = -1;
                 for (int i = 0; i < parcels.length; i++) { // find in main roster
                     Parcel value = parcels[i];
@@ -60,22 +65,13 @@ public class UIPerishableQueue extends UIBase {
                     }
                 }
                 if (foundpos == -1) {
-                    System.out.println("This package has already been readied for delivery; Refresh the current priority queue");
+                    System.out.println("This package is neither in the parcel roster nor is being delivered... idk what to say lmao like... tihs is like so friggin rare yo");
                     break;
                 }
 
-                for (int i = foundpos; i < parcels.length; i++) { // delete in main roster
-                    // this basically moves every value after the found position down
-                    // therefore deleting the value
-                    if (parcels[i] == null) { // this slot is empty; no need to move anymore
-                        break;
-                    }
-                    Parcel value = parcels[i + 1];
-                    parcels[i] = value;
-                }
+                ParcelArrayHelper.deletePos(parcels, foundpos);
 
-
-                System.out.println("Delivered: " + delivered);
+                System.out.println("Queued for transport: " + delivered);
                 priorityQueue.display();
                 break;
         }
