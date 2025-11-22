@@ -14,11 +14,7 @@ public class UIParcel extends UIBase {
         displayChoices = new String[] {
             "Enter Parcels",
             "Display All Parcels",
-            "Sort Parcels By ...",
-            "Enqueue All Parcels",
-            "Dequeue From Parcel Pickup Queue"
-            //"Insert Parcels Into Priority Queue",
-            //"Deliver From Priority Queue"
+            "Sort Parcels By ..."
         };
     }
     
@@ -30,7 +26,7 @@ public class UIParcel extends UIBase {
 
         switch(choice) {
             case 1:
-                if (parcels[parcels.length - 1] != null) { // assuming that there is no void inbetween items in the array
+                if (parcels[parcels.length - 1] != null) { // assuming that there is no void inbetween items in the array; and that the items 
                     System.out.println("The current parcel roster if full!");
                     break;
                 }
@@ -96,22 +92,7 @@ public class UIParcel extends UIBase {
                 for (Parcel p : parcels) System.out.println(p);
 
                 break;
-                
-            case 4:
-                if (parcels[0] == null) { 
-                    System.out.println("Enter Parcels First");
-                    break;
-                }
-                
-                for (Parcel p : parcels) pickupQueue.enqueue(p);
-                pickupQueue.display();
-                break;
-            
-            case 5:
-                Parcel served = pickupQueue.dequeue();
-                if (served != null) System.out.println("Picked up: " + served);
-                pickupQueue.display();
-                break;
+              
         }
     }
 }

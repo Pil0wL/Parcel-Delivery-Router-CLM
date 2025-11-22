@@ -3,14 +3,19 @@ package parceldeliveryproject.util;
 
 
 import parceldeliveryproject.ds.*;
-import parceldeliveryproject.model.Parcel;
+import parceldeliveryproject.ds.BinarySearchTree.*;
+import parceldeliveryproject.model.*;
 import java.util.Scanner;
 
 
-public class Platform { // a class used 
+public class Platform { // a class used for sharing between UI
     public Parcel[] parcels = null;
     public Queue pickupQueue = null;
     public PriorityQueue priorityQueue = null;
     public Scanner console = null;
+
     
+    public DoubleyLinkedList RouteDLL = null;
+    public BSTRoute RealisticRoute = null;
+    public VEHICP Truck = null;
 }
