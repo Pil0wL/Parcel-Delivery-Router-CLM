@@ -43,12 +43,13 @@ public class UIParcel extends UIBase {
                 double weight = console.nextDouble();
 
                 System.out.print("Is it Fragile/Perishable? (True/False): ");
-                boolean fragperi = !(console.next().equals("False"));
+                boolean fragperi = (console.next().equals("True"));
 
                 int foundEmptySlot = 0;
                 for (int index = 0; index < parcels.length; index++) { // guaranteed to give something as per the checking
                     if (parcels[index] == null) {
                         foundEmptySlot = index;
+                        break;
                     }
                 }
                 parcels[foundEmptySlot] = new Parcel(name, zip, weight, fragperi);
