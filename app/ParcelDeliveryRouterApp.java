@@ -19,6 +19,8 @@ public class ParcelDeliveryRouterApp {
         Scope.pickupQueue = new Queue(5);
         Scope.console = console;
         Scope.RouteDLL = new DoubleyLinkedList();
+        Scope.REAHistoryMaxSize = 64;
+        Scope.resetREAHistory();
         Scope.Truck = new VEHICP();
 
         Scope.RouteDLL._load(Scope);
@@ -32,7 +34,8 @@ public class ParcelDeliveryRouterApp {
             new UIParcel(Scope),
             new UIPerishableQueue(Scope),
             new UIPickupTransit(Scope),
-            new UIRouteOperator(Scope)
+            new UIRouteOperator(Scope),
+            new UITruckControls(Scope)
         };
         
         UIBase selectedInterface = interfaceArray[0];

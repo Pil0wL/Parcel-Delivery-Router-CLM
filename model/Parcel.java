@@ -15,8 +15,8 @@ public class Parcel {
     public final double Weight; // in kilograms
     public final boolean Fragile;
     
-    public DoubleyLinkedList.Node AssociatedNode = null; // think of this as its target house
-    public boolean InTransit = false;
+    public DoubleyLinkedList.Node AssociatedNode = null; // think of this as its target house // created when it is queued for pickup
+    public boolean InTransit = false; // used in the route
     
     public Parcel(String Name, int ZIP, double Weight, boolean Fragile) {
         ID = Long.toString(System.nanoTime());
