@@ -72,6 +72,9 @@ public class UIParcel extends UIBase {
                     System.out.println("No Parcels Entered Yet");
                     break;
                 }
+                System.out.println((String) String.format(UIBase.choiceFormat, 1, "Name"));
+                System.out.println((String) String.format(UIBase.choiceFormat, 2, "ZIP"));
+                System.out.println((String) String.format(UIBase.choiceFormat, 3, "Weight"));
                 int sort_choice = console.nextInt();
                 if (sort_choice < 1 || sort_choice > 3) {
                     System.out.println("Choice is out of range");
