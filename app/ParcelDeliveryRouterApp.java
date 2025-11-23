@@ -14,7 +14,6 @@ public class ParcelDeliveryRouterApp {
         
         Scanner console = new Scanner(System.in);
         
-        
         Platform Scope = new Platform();
         Scope.parcels = new Parcel[5];
         Scope.pickupQueue = new Queue(5);
@@ -23,13 +22,17 @@ public class ParcelDeliveryRouterApp {
         Scope.Truck = new VEHICP();
 
         Scope.RouteDLL._load(Scope);
-        Scope.RealisticRoute._load(Scope);
+        //Scope.RealisticRoute._load(Scope);
         Scope.Truck._load(Scope); // needs to be after the routedll
+
+        Scope.ntisfeitro = Scope.RouteDLL._WareHouse;
         
 
         UIBase[] interfaceArray = new UIBase[] {
             new UIParcel(Scope),
             new UIPerishableQueue(Scope),
+            new UIPickupTransit(Scope),
+            new UIRouteOperator(Scope)
         };
         
         UIBase selectedInterface = interfaceArray[0];

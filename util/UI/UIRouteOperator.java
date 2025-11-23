@@ -12,9 +12,12 @@ public class UIRouteOperator extends UIBase {
         super(Scope);
         menuTitle = "Route Operator Menu";
         displayChoices = new String[] {
-            "Enqueue first Parcel",
-            "Enqueue All Parcels",
-            "Dequeue From Parcel Pickup Queue",
+            "Show Selected Route Node",
+            "Show Current Route",
+            "Move Selected by Left by n",
+            "Move Selected by Right by n",
+            "Undo",
+            "Redo",
             "(Iterate Delivery Transport)"
         };
 
@@ -23,43 +26,25 @@ public class UIRouteOperator extends UIBase {
     
     @Override
     public void selectedChoice(int choice) {
-        Parcel[] parcels = Scope.parcels;
+        Scanner console = Scope.console;
         Queue pickupQueue = Scope.pickupQueue;
         DoubleyLinkedList RouteDLL = Scope.RouteDLL;
 
         switch(choice) {
             case 1:
-                if (parcels[0] == null) { 
-                    System.out.println("Enter Parcels First");
-                    break;
-                }
-                Parcel target = parcels[0];
-                ParcelArrayHelper.deletePos(parcels, 0);
-
-                pickupQueue.enqueue(target);
-
-                pickupQueue.display();
+                System.out.println("You are currently at route: " + Scope.ntisfeitro);
                 break;
             case 2:
-                if (parcels[0] == null) { 
-                    System.out.println("Enter Parcels First");
-                    break;
-                }
-                
-                for (Parcel p : parcels) pickupQueue.enqueue(p);
-                for (int index = 0; index < parcels.length; index++) {
-                    parcels[index] = null;
-                }
-
-
-                pickupQueue.display();
+                System.out.println("The current route...\n");
+                RouteDLL.printWhole();
                 break;
-            
             case 3:
-
+                
+                System.out.println("\nInsert amount to move by...");
+                System.out.print("Name: ");
+                int name = console.nextInt();
 
                 break;
-
             case 4:
                 Parcel served = pickupQueue.dequeue();
                 if (served == null) break;
