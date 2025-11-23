@@ -19,9 +19,7 @@ public class UIPerishableQueue extends UIBase {
     
     @Override
     public void selectedChoice(int choice) {
-        Scanner console = Scope.console;
         Parcel[] parcels = Scope.parcels;
-        Queue pickupQueue = Scope.pickupQueue;
         PriorityQueue priorityQueue = Scope.priorityQueue;
 
         switch(choice) {
