@@ -4,14 +4,13 @@ import parceldeliveryproject.util.*;
 import parceldeliveryproject.model.Parcel;
 import parceldeliveryproject.ds.*;
 
-import java.util.Scanner;
-
 public class UIPerishableQueue extends UIBase {
     
     public UIPerishableQueue(Platform Scope) {
         super(Scope);
         menuTitle = "Perishable Queue Menu";
         displayChoices = new String[] {
+            "Display current Queue",
             "Create a new Priority Queue from the current parcel roster",
             "Enqueue for transport From Priority Queue"
         };
@@ -24,6 +23,9 @@ public class UIPerishableQueue extends UIBase {
 
         switch(choice) {
             case 1:
+                priorityQueue.display();
+                break;
+            case 2:
                 if (parcels[0] == null) { 
                     System.out.println("Enter Parcels First!");
                     break;
@@ -31,11 +33,14 @@ public class UIPerishableQueue extends UIBase {
                 priorityQueue = new PriorityQueue(parcels.length);
                 Scope.priorityQueue = priorityQueue;
 
-                for (Parcel p : parcels) priorityQueue.insert(p);
+                for (Parcel p : parcels) {
+                    if (p == null) break;
+                    priorityQueue.insert(p);
+                }
                 priorityQueue.display();
                 break;
             
-            case 2:
+            case 3:
                 if (priorityQueue == null) {
                     System.out.println("Priority Queue Unavailable; Create one first");
                     break;
@@ -47,7 +52,11 @@ public class UIPerishableQueue extends UIBase {
                 }
 
                 if (delivered.InTransit) {
-                    System.out.println("This package has already been readied for delivery; Refresh the current priority queue");
+                    System.out.println("This package is already being delivered; Refresh the current priority queue");
+                    break;
+                }
+                if (delivered.AssociatedNode != null) {
+                    System.out.println("This package is already readied for delivery; Refresh the current priority queue");
                     break;
                 }
 
