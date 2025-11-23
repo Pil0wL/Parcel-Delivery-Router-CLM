@@ -19,6 +19,6 @@ public class VEHICP { // Very Efficient Hauler In Carrying Parcels
     public DoubleyLinkedList.Node currentNode;
 
     public void iterate() {
-
+        
     }
 }

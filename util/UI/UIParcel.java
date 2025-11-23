@@ -14,7 +14,8 @@ public class UIParcel extends UIBase {
         displayChoices = new String[] {
             "Enter Parcels",
             "Display All Parcels",
-            "Sort Parcels By ..."
+            "Sort Parcels By ...",
+            "[DEBUG; comment this in real]: insert test parcels"
         };
     }
     
@@ -93,6 +94,18 @@ public class UIParcel extends UIBase {
 
                 break;
               
+            case 4:
+                if (parcels[0] != null) {
+                    System.out.println("Requires that there was no parcels inserted beforehand");
+                    break;
+                }
+                parcels[0] = new Parcel("Skibiwdi", 1200, 12.5, false);
+                parcels[1] = new Parcel("not fragile fr", 1200, 12.5, true);
+                parcels[2] = new Parcel("Your mom", 1500, 400, false);
+                parcels[3] = new Parcel("Iron Blocks", 800, 200, false);
+                
+                System.out.println("added the parcels for debug");
+                break;
         }
     }
 }
