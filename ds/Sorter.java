@@ -5,9 +5,20 @@ package parceldeliveryproject.ds;
 import parceldeliveryproject.model.Parcel;
 
 public class Sorter {
+    private static int currentMaxSize(Parcel[] parcels) {
+        int i = 0;
+        for (; i < parcels.length - 1; i++) {
+            if (parcels[i] == null) {
+                break;
+            } 
+        }
+        return i;
+    }
+
     public static void bubbleSortName(Parcel[] parcels) {
-        for (int i = 0; i < parcels.length - 1; i++) {
-            for (int j = 0; j < parcels.length - i - 1; j++) {
+        int max = currentMaxSize(parcels);
+        for (int i = 0; i < max - 1; i++) {
+            for (int j = 0; j < max - i - 1; j++) {
                 if (parcels[j].Name.compareToIgnoreCase(parcels[j + 1].Name) > 0) {
                     Parcel temp = parcels[j];
                     parcels[j] = parcels [j + 1];
@@ -18,7 +29,8 @@ public class Sorter {
     }
     
     public static void insertionSortZIP(Parcel[] parcels) {
-        for (int i = 1; i < parcels.length; i++) {
+        int max = currentMaxSize(parcels);
+        for (int i = 1; i < max; i++) {
             Parcel key = parcels[i];
             int j = 1 - 1;
 
@@ -31,9 +43,10 @@ public class Sorter {
     }
     
     public static void selectionSortWeight(Parcel[] parcels) {
-        for (int i = 0; i < parcels.length - 1; i++) {
+        int max = currentMaxSize(parcels);
+        for (int i = 0; i < max - 1; i++) {
             int min = i;
-            for (int j = i + 1; j < parcels.length; j++) {
+            for (int j = i + 1; j < max; j++) {
                 if (parcels[j].Weight < parcels[min].Weight) {
                 min = j;
                 }
