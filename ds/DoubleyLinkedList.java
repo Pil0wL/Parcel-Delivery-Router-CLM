@@ -1,6 +1,7 @@
 
 
 package parceldeliveryproject.ds;
+import javax.swing.Action;
 import parceldeliveryproject.util.Platform;
 
 public class DoubleyLinkedList { // I like to imagine this as a snake which head's facing the sun
@@ -49,9 +50,7 @@ public class DoubleyLinkedList { // I like to imagine this as a snake which head
         head = created;
         return created;
     }
-    public final Node addFirst(int ZIP) {
-        Node created = _addFirst(ZIP);
-
+    private void placeRealistically(Node created, int ZIP) {
         if (ZIP < _WareHouse.ZIP) { // place this realistically (Sorted by ZIP) going toward left
             Node placeLeftOf = _WareHouse;
             while (true) {
@@ -110,9 +109,34 @@ public class DoubleyLinkedList { // I like to imagine this as a snake which head
                 }
             }
         }
+    }
+    public final Node addFirst(int ZIP) {
+        Node created = _addFirst(ZIP);
+        placeRealistically(created, ZIP);
 
         return created;
     }
+    public Node addLast(int ZIP) {
+        Node created = new Node(ZIP);
+
+        if (tail == null) { // its empty
+            head = created;
+            tail = created;
+            return created;
+        }
+
+        tail.down = created; 
+
+        created.up = tail; // to replace the tail
+        //created.down = null; // by default its null anyways
+
+        tail = created;
+
+        placeRealistically(created, ZIP);
+        
+        return created;
+    }
+
 
 
    public void removeNode(Node node) {
@@ -146,15 +170,117 @@ public class DoubleyLinkedList { // I like to imagine this as a snake which head
     }
 
 
+    public int moveNodeLeftBy(Node thisNode, int n) {
+        
+        if (n < 1) {
+            n = 1;
+        }
+        Node placeUpOf = thisNode;
 
-    public void printWhole() {
+        int total_moved = 0;
+        for (int i = 0; i < n; i++) {
+            Node temp = placeUpOf.up;
+            if (temp == null) break;
+            total_moved++;
+            placeUpOf = temp;
+        }
+        if (total_moved == 0) return 0; // cannot move at all; this is already at maximum left
+
+        if (thisNode == tail) tail = thisNode.up; // new tail
+
+        // set the old location's two nodes that were next to each other to well... each other
+        thisNode.up.down = thisNode.down; // target.up is guaranteed
+        {
+            Node targetsDown = thisNode.down;
+            if (targetsDown != null) targetsDown.up = thisNode.up;
+        }
+
+        // set this node's links
+        thisNode.up = placeUpOf.up;
+        thisNode.down = placeUpOf;
+
+        // set the destination's nodes to this
+        {
+            Node hasUp = placeUpOf.up;
+            if (hasUp != null) hasUp.down = thisNode;
+        }
+        placeUpOf.up = thisNode; // has to be after the codeblock above
+
+        if (placeUpOf == head) head = thisNode; // new head
+
+        return total_moved;
+    }
+
+    public int moveNodeRightBy(Node thisNode, int n) { // again... just a reflection of the one above
+        
+        if (n < 1) {
+            n = 1;
+        }
+        Node placeDownOf = thisNode;
+
+        int total_moved = 0;
+        for (int i = 0; i < n; i++) {
+            Node temp = placeDownOf.down;
+            if (temp == null) break;
+            total_moved++;
+            placeDownOf = temp;
+        }
+        if (total_moved == 0) return 0; // cannot move at all; this is already at maximum right
+
+        if (thisNode == head) head = thisNode.down; // new head
+
+        // set the old location's two nodes that were next to each other to well... each other
+        thisNode.down.up = thisNode.up; // target.up is guaranteed
+        {
+            Node targetsUp = thisNode.up;
+            if (targetsUp != null) targetsUp.down = thisNode.down;
+        }
+
+        // set this node's links
+        thisNode.up = placeDownOf;
+        thisNode.down = placeDownOf.down;
+
+        // set the destination's nodes to this
+        {
+            Node hasDown = placeDownOf.down;
+            if (hasDown != null) hasDown.up = thisNode;
+        }
+        placeDownOf.down = thisNode; // has to be after the codeblock above
+
+        if (placeDownOf == tail) tail = thisNode; // new tail
+
+        return total_moved;
+    }
+
+
+    public void printWhole(Node selectedNode) {
+        System.out.println("");
         Node current = head;
         while (current != null) {
-            System.out.print(current + " <-> ");
+            if (current == tail) break;
+            String to_print;
+            if (current != selectedNode) {
+                to_print = current.toString();
+            } else {
+                to_print = current.toString() + " (currently selected)";
+            }
+            System.out.print(to_print + " <-> ");
             current = current.down;
+        }
+
+        if (current != null) {
+            if (current != selectedNode) { // current being actaully null is not possible if everything is correct; i just added it here so java can be quiet
+                System.out.println(current.toString());
+            } else {
+                System.out.println(current.toString() + " (currently selected)");
+            }
         }
     }
 
+
+    public Node getHead() {
+        return head;
+    }
 }
 
     

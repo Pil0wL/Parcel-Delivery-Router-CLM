@@ -15,7 +15,7 @@ public class UIParcel extends UIBase {
             "Enter Parcels",
             "Display All Parcels",
             "Sort Parcels By ...",
-            "[DEBUG; comment this in real]: insert test parcels"
+            "[DEBUG]: Insert test parcels"
         };
     }
     
@@ -34,7 +34,7 @@ public class UIParcel extends UIBase {
 
                 System.out.println("\nEnter Details For this Parcel:");
                 System.out.print("Name: ");
-                String name = console.nextLine();
+                String name = console.next();
 
                 System.out.print("ZIP Code: ");
                 int zip = console.nextInt();
@@ -43,9 +43,8 @@ public class UIParcel extends UIBase {
                 double weight = console.nextDouble();
 
                 System.out.print("Is it Fragile/Perishable? (True/False): ");
-                boolean fragperi = console.nextBoolean();
+                boolean fragperi = !(console.next().equals("False"));
 
-                console.nextLine();
                 int foundEmptySlot = 0;
                 for (int index = 0; index < parcels.length; index++) { // guaranteed to give something as per the checking
                     if (parcels[index] == null) {
@@ -55,12 +54,16 @@ public class UIParcel extends UIBase {
                 parcels[foundEmptySlot] = new Parcel(name, zip, weight, fragperi);
                 
                 System.out.println("Parcel Successfully Recorded");
+                System.out.println(parcels[foundEmptySlot]);
                 break;
 
                 
             case 2:
                 System.out.println("\n=====List Of Parcels=====");
-                for (Parcel p : parcels) System.out.println(p);
+                for (Parcel p : parcels) {
+                    if (p == null) break;
+                    System.out.println(p);
+                }
                 break;
 
             case 3:
@@ -90,7 +93,10 @@ public class UIParcel extends UIBase {
                         System.out.println("\nParcels Sorted By Weight:");
                         break;
                 }
-                for (Parcel p : parcels) System.out.println(p);
+                for (Parcel p : parcels) {
+                    if (p == null) break;
+                    System.out.println(p);
+                }
 
                 break;
               

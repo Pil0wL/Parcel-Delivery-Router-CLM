@@ -10,7 +10,8 @@ public class UIPickupTransit extends UIBase {
         super(Scope);
         menuTitle = "Pickup/Transit Menu";
         displayChoices = new String[] {
-            "Enqueue first Parcel",
+            "Show Current Queue",
+            "Enqueue First Parcel",
             "Enqueue All Parcels"
         };
 
@@ -25,15 +26,21 @@ public class UIPickupTransit extends UIBase {
 
         switch(choice) {
             case 1:
+                pickupQueue.display();
+
+                break;
+            case 2:
                 if (parcels[0] == null) { 
                     System.out.println("Enter Parcels First");
                     break;
                 }
 
                 Parcel target = parcels[0];
-                target.InTransit = true; // set its in-transit value to true
-                DoubleyLinkedList.Node AssociatedNode = RouteDLL.addFirst(target.ZIP);
-                target.AssociatedNode = AssociatedNode; // have an associated node/home for it to go to
+                //target.InTransit = true; // set its in-transit value to true // now moved in the truck
+                
+                // no need as the ZIP code will do
+                DoubleyLinkedList.Node AssociatedNode = RouteDLL.addLast(target.ZIP);
+                target.AssociatedNode = AssociatedNode; // have an associated node/home for it to go to 
 
                 ParcelArrayHelper.deletePos(parcels, 0); // delete it in the main parcel roster
 
@@ -41,16 +48,18 @@ public class UIPickupTransit extends UIBase {
 
                 pickupQueue.display();
                 break;
-            case 2:
+            case 3:
                 if (parcels[0] == null) { 
                     System.out.println("Enter Parcels First");
                     break;
                 }
                 
                 for (Parcel p : parcels) {
+                    if (p == null) break;
+                    //p.InTransit = true; // now moved in the truck
+                    DoubleyLinkedList.Node indexedAN = RouteDLL.addLast(p.ZIP); // Associated Node
+                    p.AssociatedNode = indexedAN; // have an associated node/home for it to go to 
                     pickupQueue.enqueue(p);
-                    p.InTransit = true;
-                    RouteDLL.addFirst(p.ZIP);
                 }
                 for (int index = 0; index < parcels.length; index++) { // delete everything
                     parcels[index] = null;
