@@ -40,9 +40,10 @@ public class Queue {
             System.out.println("Queue is Empty");
             return;
         }
+
         System.out.println("\nPickup Queue:");
         for (int i = 0; i < size; i++) {
-            int index = (front + 1) % data.length;
+            int index = (front + i) % data.length;
             System.out.println(" " + data[index]);
         }
     }
