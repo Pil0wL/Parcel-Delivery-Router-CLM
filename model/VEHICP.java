@@ -123,8 +123,14 @@ public class VEHICP { // Very Efficient Hauler In Carrying Parcels
                 carryingCargo.remove(i); // remove the parcel
                 System.out.println("Delivered a parcel!");
                 RouteDLL.removeNode(value.AssociatedNode); // remove this destination from the system
-                System.out.println("Reset Route edit action history!");
+                value.AssociatedNode = null; // me when i free up memory ts so tuff frfr
+                value.InTransit = false;
+
+                Scope.deliveryLog.add(value); // add this delivery to the delivery log
+
+                System.out.println("Reset Route edit action history! ... because a route was removed and it wont be relevant anymore");
                 Scope.resetREAHistory();
+
 
                 if (currentTarget == currentNode) {
                     System.out.println("...this was also my target, I am going to be removing it");
@@ -147,6 +153,10 @@ public class VEHICP { // Very Efficient Hauler In Carrying Parcels
         // Main movement AI
         if (currentNode == currentTarget) {
             currentTarget = currentTarget.down; // go to next one
+            if (currentTarget == null) {
+                System.out.println("reached the target! but there is no more routes after this one, aborting traverse!");
+                return;
+            }
             System.out.println("reached target! going to the next one after it in the route plan, which is: " + currentTarget);
         }
         traverse(currentTarget);

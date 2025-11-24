@@ -7,7 +7,7 @@ import parceldeliveryproject.model.Parcel;
 public class Sorter {
     private static int currentMaxSize(Parcel[] parcels) {
         int i = 0;
-        for (; i < parcels.length - 1; i++) {
+        for (; i < parcels.length; i++) {
             if (parcels[i] == null) {
                 break;
             } 
@@ -17,11 +17,12 @@ public class Sorter {
 
     public static void bubbleSortName(Parcel[] parcels) {
         int max = currentMaxSize(parcels);
+
         for (int i = 0; i < max - 1; i++) {
             for (int j = 0; j < max - i - 1; j++) {
                 if (parcels[j].Name.compareToIgnoreCase(parcels[j + 1].Name) > 0) {
                     Parcel temp = parcels[j];
-                    parcels[j] = parcels [j + 1];
+                    parcels[j] = parcels[j + 1];
                     parcels[j + 1] = temp;
                 }
             }
@@ -30,14 +31,17 @@ public class Sorter {
     
     public static void insertionSortZIP(Parcel[] parcels) {
         int max = currentMaxSize(parcels);
+
+
         for (int i = 1; i < max; i++) {
             Parcel key = parcels[i];
-            int j = 1 - 1;
+            int j = i - 1;
 
             while (j >= 0 && parcels[j].ZIP > key.ZIP) {
                 parcels[j + 1] = parcels[j];
                 j--;
             }
+
             parcels[j + 1] = key;
         }
     }

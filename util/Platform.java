@@ -20,14 +20,15 @@ public class Platform { // a class used for sharing between UI
     public int REAHistoryMaxSize = 0; // route edit actions
     public StackX<RouteEditAction> REACurrentHistory = null; // route edit actions
     public StackX<RouteEditAction> REAUndoHistory = null; // route edit actions
-    public BSTRoute RealisticRoute = null;
     public VEHICP Truck = null;
+
+    public SingleLinkedList deliveryLog = null;
 
     public void resetREAHistory() {
         REACurrentHistory = new StackX<>(REAHistoryMaxSize);
         REAUndoHistory = new StackX<>(REAHistoryMaxSize);
     }
-    public void REAUndoHistory() {
+    public void resetUndoHistory() {
         REAUndoHistory = new StackX<>(REAHistoryMaxSize);
     }
 }

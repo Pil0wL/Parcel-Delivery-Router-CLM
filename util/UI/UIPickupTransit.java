@@ -38,7 +38,6 @@ public class UIPickupTransit extends UIBase {
                 Parcel target = parcels[0];
                 //target.InTransit = true; // set its in-transit value to true // now moved in the truck
                 
-                // no need as the ZIP code will do
                 DoubleyLinkedList.Node AssociatedNode = RouteDLL.addLast(target.ZIP);
                 target.AssociatedNode = AssociatedNode; // have an associated node/home for it to go to 
 
