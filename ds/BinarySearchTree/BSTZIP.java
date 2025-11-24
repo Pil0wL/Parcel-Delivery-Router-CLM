@@ -103,12 +103,13 @@ public class BSTZIP {
                 succ = succ.left;
             }
 
-            // Fix connections
+            // Detach successor from its parent
             if (succParent != current) {
-                succParent.left = succ.right; // move successor's right child
+                succParent.left = succ.right; 
+                succ.right = current.right;   // attach right child safely
             }
+
             succ.left = current.left;
-            succ.right = current.right; // always attach right child
 
             if (parent == null) return succ; // root deleted
 
@@ -119,9 +120,9 @@ public class BSTZIP {
         return root;
     }
 
-    public void showAll() {
+    public void printWhole() {
         if (root == null) {
-            System.out.println("BST is empty.");
+            System.out.println("The ZIP index is empty!");
             return;
         }
 
