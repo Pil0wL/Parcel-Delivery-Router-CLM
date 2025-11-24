@@ -7,6 +7,7 @@ import parceldeliveryproject.model.*;
 import parceldeliveryproject.util.UI.*;
 import parceldeliveryproject.util.Platform;
 import java.util.Scanner;
+import parceldeliveryproject.ds.BinarySearchTree.BSTZIP;
 
 public class ParcelDeliveryRouterApp {
 
@@ -14,15 +15,23 @@ public class ParcelDeliveryRouterApp {
         
         Scanner console = new Scanner(System.in);
         
+        System.out.print("Enter a max Parcel roster size (min of 5):");
+        int maxSize = console.nextInt();
+        if (maxSize < 5) {
+            maxSize = 5;
+        }
+
+
         Platform Scope = new Platform();
-        Scope.parcels = new Parcel[5];
-        Scope.pickupQueue = new Queue(5);
+        Scope.parcels = new Parcel[maxSize];
+        Scope.pickupQueue = new Queue(maxSize);
         Scope.console = console;
         Scope.RouteDLL = new DoubleyLinkedList();
         Scope.REAHistoryMaxSize = 64;
         Scope.resetREAHistory();
         Scope.Truck = new VEHICP();
         Scope.deliveryLog = new SingleLinkedList();
+        Scope.ZIPIndex = new BSTZIP();
 
         Scope.RouteDLL._load(Scope);
         //Scope.RealisticRoute._load(Scope);

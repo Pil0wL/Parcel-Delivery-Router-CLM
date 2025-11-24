@@ -20,9 +20,15 @@ public class UIPerishableQueue extends UIBase {
     public void selectedChoice(int choice) {
         Parcel[] parcels = Scope.parcels;
         PriorityQueue priorityQueue = Scope.priorityQueue;
+        DoubleyLinkedList RouteDLL = Scope.RouteDLL;
+        Queue pickupQueue = Scope.pickupQueue;
 
         switch(choice) {
             case 1:
+                if (priorityQueue == null) { 
+                    System.out.println("Create a priority queue first!");
+                    break;
+                }
                 priorityQueue.display();
                 break;
             case 2:
@@ -45,17 +51,17 @@ public class UIPerishableQueue extends UIBase {
                     System.out.println("Priority Queue Unavailable; Create one first");
                     break;
                 }
-                Parcel delivered = priorityQueue.remove();
-                if (delivered == null) {
+                Parcel targetParcel = priorityQueue.remove();
+                if (targetParcel == null) {
                     System.out.println("Priority Queue is empty!");
                     break;
                 }
 
-                if (delivered.InTransit) {
+                if (targetParcel.InTransit) {
                     System.out.println("This package is already being delivered; Refresh the current priority queue");
                     break;
                 }
-                if (delivered.AssociatedNode != null) {
+                if (targetParcel.AssociatedNode != null) {
                     System.out.println("This package is already readied for delivery; Refresh the current priority queue");
                     break;
                 }
@@ -66,7 +72,7 @@ public class UIPerishableQueue extends UIBase {
                     if (value == null) {
                         break;
                     }
-                    if (delivered == value) {
+                    if (targetParcel == value) {
                         foundpos = i;
                         break;
                     }
@@ -78,9 +84,16 @@ public class UIPerishableQueue extends UIBase {
 
                 ParcelArrayHelper.deletePos(parcels, foundpos);
 
-                System.out.println("Queued for transport: " + delivered);
+                // man i should have a global func for this
+                DoubleyLinkedList.Node AssociatedNode = RouteDLL.addLast(targetParcel.ZIP);
+                targetParcel.AssociatedNode = AssociatedNode; // have an associated node/home for it to go to 
+
+                pickupQueue.enqueue(targetParcel);
+
+                System.out.println("Queued for transport: " + targetParcel);
                 priorityQueue.display();
                 break;
+
         }
     }
 }

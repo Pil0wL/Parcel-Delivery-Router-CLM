@@ -23,6 +23,7 @@ public class Platform { // a class used for sharing between UI
     public VEHICP Truck = null;
 
     public SingleLinkedList deliveryLog = null;
+    public BSTZIP ZIPIndex = null;
 
     public void resetREAHistory() {
         REACurrentHistory = new StackX<>(REAHistoryMaxSize);

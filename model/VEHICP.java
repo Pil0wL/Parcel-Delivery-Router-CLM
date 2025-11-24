@@ -124,6 +124,7 @@ public class VEHICP { // Very Efficient Hauler In Carrying Parcels
                 System.out.println("Delivered a parcel!");
                 RouteDLL.removeNode(value.AssociatedNode); // remove this destination from the system
                 value.AssociatedNode = null; // me when i free up memory ts so tuff frfr
+                Scope.ZIPIndex.remove(value.ZIP); // remove it from the current index
                 value.InTransit = false;
 
                 Scope.deliveryLog.add(value); // add this delivery to the delivery log
