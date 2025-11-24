@@ -5,7 +5,7 @@ package parceldeliveryproject.ds.BinarySearchTree;
 import parceldeliveryproject.util.Platform;
 import parceldeliveryproject.ds.DoubleyLinkedList;
 
-public class BSTRoute {
+public class BSTRoute { // keeping this for legacy of what would've been
 
 
     private Node root = null;

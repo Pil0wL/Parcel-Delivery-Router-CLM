@@ -61,7 +61,7 @@ public class UIRouteOperator extends UIBase {
                     REAUndoHistory = Scope.REAUndoHistory;
                 }
                 if (!REAUndoHistory.isEmpty()) { // clear the undo history IF it isn't empty because it isn't relevant anymore
-                    Scope.REAUndoHistory();
+                    Scope.resetUndoHistory();
                     //REAUndoHistory = Scope.REAUndoHistory; // i just remembered that this file isn't continious
                 }
                 REACurrentHistory.push(new RouteEditAction(Scope.ntisfeitro, movedLeftBy, true));
@@ -87,7 +87,7 @@ public class UIRouteOperator extends UIBase {
                     REAUndoHistory = Scope.REAUndoHistory;
                 }
                 if (!REAUndoHistory.isEmpty()) { // clear the undo history IF it isn't empty because it isn't relevant anymore
-                    Scope.REAUndoHistory();
+                    Scope.resetUndoHistory();
                     //REAUndoHistory = Scope.REAUndoHistory; // i just remembered that this file isn't continious
                 }
                 REACurrentHistory.push(new RouteEditAction(Scope.ntisfeitro, movedRightBy, false));
