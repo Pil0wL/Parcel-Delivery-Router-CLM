@@ -44,7 +44,7 @@ public class SingleLinkedList {
         System.out.println("");
         Node current = head;
         while (current.next != null) {
-            System.out.print(current + " -> ");
+            System.out.print(current + " <- ");
             current = current.next;
         }
 

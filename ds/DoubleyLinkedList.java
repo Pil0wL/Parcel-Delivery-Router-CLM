@@ -26,7 +26,6 @@ public class DoubleyLinkedList { // I like to imagine this as a snake which head
             this.ZIP = ZIP;
         }
 
-
         @Override
         public String toString() {
             return String.format("[%d]", ZIP);

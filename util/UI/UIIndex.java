@@ -11,7 +11,8 @@ public class UIIndex extends UIBase {
         super(Scope);
         menuTitle = "Index Menu";
         displayChoices = new String[] {
-            "Show Delivery Log"
+            "Show Delivery Log",
+            "Show Current ZIP Index",
         };
 
         
@@ -25,7 +26,7 @@ public class UIIndex extends UIBase {
                 
                 break;
             case 2:
-                Scope.Truck.displayCargo();
+                Scope.ZIPIndex.printWhole();
 
                 break;
         }

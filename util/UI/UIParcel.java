@@ -15,7 +15,7 @@ public class UIParcel extends UIBase {
             "Enter Parcels",
             "Display All Parcels",
             "Sort Parcels By ...",
-            "[DEBUG]: Insert test parcels"
+            //"[DEBUG]: Insert test parcels"
         };
     }
     
@@ -27,7 +27,7 @@ public class UIParcel extends UIBase {
 
         switch(choice) {
             case 1:
-                if (parcels[parcels.length - 1] != null) { // assuming that there is no void inbetween items in the array; and that the items 
+                if (parcels[parcels.length - 1] != null) { // assuming that there is no void inbetween items in the array; and that the items are side-by-side
                     System.out.println("The current parcel roster if full!");
                     break;
                 }
@@ -36,13 +36,13 @@ public class UIParcel extends UIBase {
                 System.out.print("Name: ");
                 String name = console.next();
 
-                System.out.print("ZIP Code: ");
+                System.out.print("ZIP Code (Preferably 1-9999, but can extend out of that): ");
                 int zip = console.nextInt();
 
                 System.out.print("Weight (kg): ");
                 double weight = console.nextDouble();
 
-                System.out.print("Is it Fragile/Perishable? (True/False): ");
+                System.out.print("Is it Fragile/Perishable? (True/False) (Case Sensitive; defaults to False): ");
                 boolean fragperi = (console.next().equals("True"));
 
                 int foundEmptySlot = 0;
@@ -53,6 +53,7 @@ public class UIParcel extends UIBase {
                     }
                 }
                 parcels[foundEmptySlot] = new Parcel(name, zip, weight, fragperi);
+                Scope.ZIPIndex.insert(zip); // add it to the current index
                 
                 System.out.println("Parcel Successfully Recorded");
                 System.out.println(parcels[foundEmptySlot]);
@@ -110,9 +111,13 @@ public class UIParcel extends UIBase {
                     break;
                 }
                 parcels[0] = new Parcel("Skibiwdi", 1200, 12.5, false);
+                Scope.ZIPIndex.insert(1200);
                 parcels[1] = new Parcel("not fragile fr", 1200, 12.5, true);
-                parcels[2] = new Parcel("Your mom", 1500, 400, false);
+                Scope.ZIPIndex.insert(1200);
+                parcels[2] = new Parcel("yesterday's regret", 1500, 400, false);
+                Scope.ZIPIndex.insert(1500);
                 parcels[3] = new Parcel("Iron Blocks", 800, 200, false);
+                Scope.ZIPIndex.insert(800);
                 
                 System.out.println("added the parcels for debug");
                 break;

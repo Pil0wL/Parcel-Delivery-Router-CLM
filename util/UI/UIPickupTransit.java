@@ -38,10 +38,10 @@ public class UIPickupTransit extends UIBase {
                 Parcel target = parcels[0];
                 //target.InTransit = true; // set its in-transit value to true // now moved in the truck
                 
+                ParcelArrayHelper.deletePos(parcels, 0); // delete it in the main parcel roster
+                
                 DoubleyLinkedList.Node AssociatedNode = RouteDLL.addLast(target.ZIP);
                 target.AssociatedNode = AssociatedNode; // have an associated node/home for it to go to 
-
-                ParcelArrayHelper.deletePos(parcels, 0); // delete it in the main parcel roster
 
                 pickupQueue.enqueue(target);
 
@@ -58,6 +58,7 @@ public class UIPickupTransit extends UIBase {
                     //p.InTransit = true; // now moved in the truck
                     DoubleyLinkedList.Node indexedAN = RouteDLL.addLast(p.ZIP); // Associated Node
                     p.AssociatedNode = indexedAN; // have an associated node/home for it to go to 
+
                     pickupQueue.enqueue(p);
                 }
                 for (int index = 0; index < parcels.length; index++) { // delete everything
